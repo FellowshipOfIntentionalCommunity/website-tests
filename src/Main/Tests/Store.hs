@@ -7,9 +7,8 @@ This module tests the Web Store.
 module Main.Tests.Store (storeTests) where
 
 import qualified Data.Text as T
---import qualified Test.WebDriver as W
 
-import Control.Monad            (unless)
+import Control.Monad                (unless)
 import Test.Hspec.WebDriver
 
 import Main.Colors
@@ -19,8 +18,10 @@ import Main.Expectations
 storeTests :: Spec
 storeTests              = do
         describe "for any page" generalStoreTests
+        describe "for category pages" categoryPageTests
         describe "for general products" productDetailsPageTests
         describe "for recurring products" recurringProductDetailsPageTests
+        describe "for suggested price products" suggestedPriceProductDetailsPageTests
 
 
 -- | Test Store Details that are Visible on Every Page.
@@ -44,12 +45,24 @@ generalStoreTests       = do
                                     e `shouldHaveColor` black
                       ) es
 
+-- | Test the Category Pages.
+categoryPageTests :: Spec
+categoryPageTests       = do
+        it "opens a Category page with a `suggested price` product" . runWD $
+            openPage "http://www.ic.org/community-bookstore/category/donations-to-fic/"
+        describe "any suggested price" $
+            it "is hidden" . runWD $ do
+                es          <- findElems $ ByCSS "li.nyp-product"
+                mapM_ (\e   -> findElemsFrom e (ByCSS "span.price")
+                               `shouldReturn` []
+                      ) es
+
 
 -- | Test the General Product Details Page.
 productDetailsPageTests :: Spec
 productDetailsPageTests = do
         it "opens the Product Details page of any product" . runWD $ openPage
-            "http://www.ic.org/community-bookstore/product/directories-to-libraries/"
+            "http://www.ic.org/community-bookstore/product/wemoon-datebook/"
         describe "the product price" $ do
             priceIsCorrectSize
             priceAmountIsGreen "p.price"
@@ -71,7 +84,7 @@ productDetailsPageTests = do
                 -- e `elementShouldNotHaveAttr` "value"
 
 
--- | Test the the Product Details Page of a Product with Multiple
+-- | Test the Product Details Page of a Product with Multiple
 -- Variations.
 recurringProductDetailsPageTests :: Spec
 recurringProductDetailsPageTests = do
@@ -82,6 +95,18 @@ recurringProductDetailsPageTests = do
             theCorrectTextPrefixesAmount
             priceAmountIsGreen "p.price"
             theCorrectTextSuffixesAmount
+
+-- | Test the Product Details Page of a Product with a Suggested Price.
+suggestedPriceProductDetailsPageTests :: Spec
+suggestedPriceProductDetailsPageTests = do
+        it "opens the Details page of a Product with a suggested price" . runWD $
+            openPage "http://www.ic.org/community-bookstore/product/communities-directory-donation/"
+        describe "the product price" $
+            it "contains no text" . runWD $ do
+                price   <- findElem $ ByCSS "div.summary div p.price"
+                getText price `shouldReturn` ""
+
+
 
 
 -- | Test that the amount and any surrounding text is the same, correct size.

@@ -19,7 +19,7 @@ module Main.Expectations
 import qualified Data.Text as T
 import qualified Test.WebDriver as W
 
-import Data.Maybe               (isJust, isNothing)
+import Data.Maybe                       (isJust, isNothing)
 import Test.Hspec.WebDriver
 
 -- | Assert a Page's Title is equal to a string.

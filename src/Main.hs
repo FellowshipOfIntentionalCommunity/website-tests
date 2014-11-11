@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-|
 
 This module is the test driver, it organizes the test categories into
@@ -13,7 +12,7 @@ import Main.Tests
 
 -- | Assemble and test all Specs for the FIC's ic.org website.
 main :: IO ()
-main = hspec $ session "ic.org Tests" . using Chrome $ do
+main = hspec . session "ic.org Tests" . using Chrome $ do
         describe "Home Page Tests" homePageTests
         describe "Error Page Tests" errorPageTests
         describe "Events Tests" eventTests

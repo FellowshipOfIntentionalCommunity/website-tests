@@ -17,8 +17,8 @@ errorPageTests = describe "for 404 pages" error404PageTests
 -- | Test the 404 page and any variations.
 error404PageTests :: Spec
 error404PageTests = do
-        it "opens a non-existant page" . runWD $ openPage
-            "http://www.ic.org/i-am-so-long-that-i-probs-dont-exist"
+        it "opens a non-existant page" . runWD $
+            openPage "http://www.ic.org/i-am-so-long-that-i-probs-dont-exist"
         it "has the correct title" . runWD $ pageTitleShouldBe
             "Page Not Found - Fellowship for Intentional Community"
         it "has the correct page heading" . runWD $
