@@ -6,7 +6,8 @@ module.
 
 -}
 module Main.Tests
-    ( errorPageTests
+    ( generalTests
+    , errorPageTests
     , eventTests
     , homePageTests
     , storeTests
@@ -14,5 +15,6 @@ module Main.Tests
 
 import Main.Tests.ErrorPages
 import Main.Tests.Events
+import Main.Tests.General
 import Main.Tests.HomePage
 import Main.Tests.Store
