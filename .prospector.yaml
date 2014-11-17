@@ -1,0 +1,23 @@
+output_format: text
+
+inherits:
+    - strictness_veryhigh
+    - full_pep8
+
+
+pylint:
+    enable:
+        - C0111     # Missing docstring
+        - C0112     # Empty docstring
+
+pyflakes:
+    enable:
+        - FL0007
+    disable:
+        - FL0013    # Variable assigned but never used (pylint's is better)
+
+frosted:
+    enable:
+        - E401
+    disable:
+        - E307      # Variable assigned but never used (pylint's is better)
