@@ -3,7 +3,8 @@
 
 # The base URL to make requests to. Choose between ic.org and
 # intcommunity.staging.wpengine.com
-BASE_URL = "http://ic.org/"
+BASE_URL = "http://www.ic.org/"
+#BASE_URL = "http://intcommunity.staging.wpengine.com/"
 
 # The trailing suffix at the end of every Page Title.
 SITE_TITLE_SUFFIXES = [

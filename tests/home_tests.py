@@ -1,4 +1,5 @@
 """Tests for the Home Page."""
+from tests import settings
 from tests.utils import SeleniumTestCase
 
 
@@ -21,4 +22,4 @@ class HomePageTests(SeleniumTestCase):
         """It should have a link to the login page."""
         link_element = self.selenium.find_element_by_link_text("Login")
         self.assert_attribute_equals(
-            link_element, "href", "http://www.ic.org/wp-login.php")
+            link_element, "href", settings.BASE_URL + "wp-login.php")
