@@ -1,5 +1,6 @@
 """Test Expectations for Store Pages."""
 from nose.plugins.skip import SkipTest
+from selenium.common.exceptions import NoSuchElementException
 
 from tests import colors
 from tests.utils import SeleniumTestCase
@@ -140,6 +141,10 @@ def _assert_price_is_correct_size(obj):
 
 def _assert_price_is_green(obj, parent):
     """Assert that the price, under an optional parent, is green."""
-    element = obj.selenium.find_element_by_css_selector(
-        "{} span.amount".format(parent))
+    try:
+        element = obj.selenium.find_element_by_css_selector(
+            "{} ins span.amount".format(parent))
+    except NoSuchElementException:
+        element = obj.selenium.find_element_by_css_selector(
+            "{} span.amount".format(parent))
     obj.assert_css_property_equals(element, "color", colors.GREEN_PRICE)
