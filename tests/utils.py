@@ -22,7 +22,6 @@ class SeleniumTestCase(unittest.TestCase):
             command_executor=settings.SELENIUM_SERVER,
             desired_capabilities=settings.SELENIUM_CAPABILITIES)
         cls.selenium.implicitly_wait(15)
-        super(SeleniumTestCase, cls).setup_class()
 
     @classmethod
     def teardown_class(cls):

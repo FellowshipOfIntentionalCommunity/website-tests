@@ -16,7 +16,7 @@ SITE_TITLE_SUFFIXES = [
 ]
 
 # Local or Travis Selenium Config
-if os.environ["TRAVIS"]:
+if 'TRAVIS' in os.environ:
     SELENIUM_SERVER = "http://{}:{}@localhost:4445/wd/hub".format(
         os.environ['SAUCE_USERNAME'], os.environ['SAUCE_ACCESS_KEY'])
     SELENIUM_CAPABILITIES = {
