@@ -17,15 +17,15 @@ SITE_TITLE_SUFFIXES = [
 
 # Local or Travis Selenium Config
 if 'TRAVIS' in os.environ:
-    print 'in Travis'
-    SELENIUM_SERVER = "http://{}:{}@localhost:4445/wd/hub".format(
+    SELENIUM_SERVER = "http://{}:{}@ondemand.saucelabs.com:80/wd/hub".format(
         os.environ['SAUCE_USERNAME'], os.environ['SAUCE_ACCESS_KEY'])
     SELENIUM_CAPABILITIES = {
-        'tunnel-identifier': os.environ['TRAVIS_JOB_NUMBER'],
+        'platform': 'Windows 7',
+        'browserName': 'chrome',
+        'tunnelIdentifier': os.environ['TRAVIS_JOB_NUMBER'],
         'build': os.environ["TRAVIS_BUILD_NUMBER"],
         'tags': [os.environ["TRAVIS_PYTHON_VERSION"], "CI"]
     }
 else:
-    print 'in local'
     SELENIUM_SERVER = 'http://127.0.0.1:4444/wd/hub'
     SELENIUM_CAPABILITIES = DesiredCapabilities.CHROME
