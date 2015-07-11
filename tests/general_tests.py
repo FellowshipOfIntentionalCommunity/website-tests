@@ -1,6 +1,4 @@
 """Test General Page Expectations for ic.org."""
-from nose.plugins.skip import SkipTest
-
 from tests.utils import SeleniumTestCase
 
 
@@ -12,6 +10,5 @@ class OldStoreTests(SeleniumTestCase):
 
     def test_redirects_to_new_store(self):
         """It should redirect to the new Community Bookstore URL."""
-        raise SkipTest("See Bug #391")
         self.assert_equal(self.selenium.current_url,
                           "http://www.ic.org/community-bookstore/")
