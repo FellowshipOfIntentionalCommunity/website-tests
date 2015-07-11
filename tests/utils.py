@@ -3,7 +3,6 @@ import unittest
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from tests import settings
 
@@ -20,9 +19,10 @@ class SeleniumTestCase(unittest.TestCase):
 
         """
         cls.selenium = webdriver.Remote(
-            command_executor="http://127.0.0.1:4444/wd/hub",
-            desired_capabilities=DesiredCapabilities.CHROME)
+            command_executor=settings.SELENIUM_SERVER,
+            desired_capabilities=settings.SELENIUM_CAPABILITIES)
         cls.selenium.implicitly_wait(15)
+        super(SeleniumTestCase, cls).setup_class()
 
     @classmethod
     def teardown_class(cls):
