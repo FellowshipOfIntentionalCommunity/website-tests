@@ -6,40 +6,6 @@ from tests import colors
 from tests.utils import SeleniumTestCase
 
 
-class TopRatedProductsWidgetTests(SeleniumTestCase):
-    """Test Expectations for the Top Rated Products Widget."""
-    def setUp(self):
-        """Visit the Home Page."""
-        self.visit('/')
-
-    def test_price_is_correct_size(self):
-        """The price should be the same size as the surrounding text."""
-        _assert_price_is_correct_size(self)
-
-    def test_price_is_prefixed_by_from_text(self):
-        """The price should be prefixed by black `From:` text if recurring."""
-        reccurring_elements = self.selenium.find_elements_by_css_selector(
-            "ul.product_list_widget li span.from")
-        for element in reccurring_elements:
-            self.assert_equal("From:", element.text)
-            self.assert_css_property_equals(element, "color", colors.BLACK)
-
-    def test_price_is_green(self):
-        """The price should be green."""
-        _assert_price_is_green(self, "li")
-
-    def test_price_is_suffixed_by_year_text(self):
-        """The price should by suffixed by black `/ year` text if recurring."""
-        products = self.selenium.find_elements_by_css_selector(
-            "ul.product_list_widget li")
-        for product in products:
-            has_recurring_text = product.find_elements_by_css_selector(
-                "span.from")
-            if has_recurring_text:
-                self.assert_in("/ year", product.text)
-                self.assert_css_property_equals(product, "color", colors.BLACK)
-
-
 class ProductCategoryTests(SeleniumTestCase):
     """Test Expectations for the Product Category Pages."""
     def setUp(self):
