@@ -77,6 +77,20 @@ class ProductDetailTests(SeleniumTestCase):
         self.assert_equal(price.text, amount.text)
 
 
+class ProductSearchTests(SeleniumTestCase):
+    """Test Expectations for the Store Product Search."""
+
+    def setUp(self):
+        """Search for a product containing the word 'consensus'."""
+        self.visit('/?s=consensus&post_type=product')
+
+    def test_page_description_is_hidden(self):
+        """The Page's description should be hidden."""
+        description = self.selenium.find_element_by_css_selector(
+            'body.search-results.woocommerce #content .page-description')
+        self.assert_css_property_equals(description, 'display', 'none')
+
+
 class SuggestedPriceProductDetailTests(SeleniumTestCase):
     """Test Expectations for Suggested Price Product Detail Pages."""
     def setUp(self):
