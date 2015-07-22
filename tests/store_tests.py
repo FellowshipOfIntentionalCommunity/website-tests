@@ -1,5 +1,5 @@
 """Test Expectations for Store Pages."""
-from nose.plugins.skip import SkipTest
+import pytest
 from selenium.common.exceptions import NoSuchElementException
 
 from tests import colors
@@ -61,6 +61,7 @@ class ProductDetailTests(SeleniumTestCase):
         """Visit a product's details page."""
         self.visit("/community-bookstore/product/gaia-education-guides/")
 
+    @pytest.mark.xfail
     def test_price_is_correct_size(self):
         """The price should be the correct size."""
         _assert_price_is_correct_size(self)
@@ -103,13 +104,13 @@ class SuggestedPriceProductDetailTests(SeleniumTestCase):
             "div.summary div p.price")
         self.assert_equal("", price.text)
 
+    @pytest.mark.xfail
     def test_price_input_has_placeholder(self):
-        """The price input should have a placeholder."""
-        raise SkipTest('See Bug #358')
+        """The price input should have a placeholder. See Bug #358"""
 
+    @pytest.mark.xfail
     def test_price_input_has_no_text(self):
-        """The price input should not have any entered text."""
-        raise SkipTest('See Bug #358')
+        """The price input should not have any entered text. See Bug #358"""
 
 
 class RecurringProductDetailTests(SeleniumTestCase):
@@ -118,6 +119,7 @@ class RecurringProductDetailTests(SeleniumTestCase):
         """Visit the details page of a recuring product."""
         self.visit("/community-bookstore/product/subscription/")
 
+    @pytest.mark.xfail
     def test_price_is_correct_size(self):
         """The price should be the correct size."""
         _assert_price_is_correct_size(self)
@@ -126,17 +128,17 @@ class RecurringProductDetailTests(SeleniumTestCase):
         """The price should be green."""
         _assert_price_is_green(self, "p.price")
 
+    @pytest.mark.xfail
     def test_price_is_prefixed_by_from_text(self):
         """The price should be prefixed by black `From:` text."""
-        raise SkipTest('See Bug #360')
         from_element = self.selenium.find_element_by_css_selector(
             "p.price span.from")
         self.assert_equal("From:", from_element.text)
         self.assert_css_property_equals(from_element, "color", colors.BLACK)
 
+    @pytest.mark.xfail
     def test_price_is_suffixed_by_year_text(self):
         """The price should be suffixed by black `/ year` text."""
-        raise SkipTest('See Bug #360')
         year_element = self.selenium.find_element_by_css_selector(
             "p.price")
         self.assert_in(" / year", year_element.text)
@@ -145,7 +147,6 @@ class RecurringProductDetailTests(SeleniumTestCase):
 
 def _assert_price_is_correct_size(obj):
     """Assert that the price and the surrounding text have a size of 14px."""
-    raise SkipTest('See Bug #359')
     price = obj.selenium.find_element_by_css_selector(".price")
     obj.assert_css_property_equals(price, "font-size", "14px")
 

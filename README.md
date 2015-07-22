@@ -2,7 +2,7 @@ FIC Integration Tests
 ======================
 
 This python project contains automated tests to verify our expectations of the
-ic.org website.
+http://ic.org website.
 
 We use Nose and Selenium to run tests in an actual browser. These tests are
 implementation-agnostic and validate only the user experience, not any specific
@@ -49,14 +49,22 @@ Change into the new directory and install the python dependencies:
 Running the Tests
 ------------------
 
-Just use `nosetests`:
+Just use `py.test`:
 
     cd fic-tests
     pip install -r requirements.txt
-    nosetests
+    py.test
 
-You can run groups of tests by specifiying a `module:class.function` path:
+You can run groups of tests by specifiying a filepath or expression to match:
 
-    nosetests tests.general_tests
-    nosetests tests.event_tests:EventDetailsTests
-    nosetests tests.error_tests:General404Tests.test_has_correct_title
+    py.test tests/store_tests.py
+    py.test -k ProductDetail
+    py.test -k ProductDetail not Suggested
+    py.test -k price
+
+Add the `--spec` arguement to more details while running:
+
+    py.test --spec
+
+You can monitor the test files & re-run the tests when they change by using the
+`ptw` command.
