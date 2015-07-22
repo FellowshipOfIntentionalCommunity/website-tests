@@ -59,7 +59,7 @@ class ProductDetailTests(SeleniumTestCase):
     """Test Expectations for the Product Details Pages."""
     def setUp(self):
         """Visit a product's details page."""
-        self.visit("/community-bookstore/product/wemoon-datebook/")
+        self.visit("/community-bookstore/product/gaia-education-guides/")
 
     def test_price_is_correct_size(self):
         """The price should be the correct size."""
