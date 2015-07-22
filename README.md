@@ -1,6 +1,8 @@
 FIC Integration Tests
 ======================
 
+[![Build Status](https://travis-ci.org/FellowshipofIntentionalCommunity/website-tests.svg?branch=master)](https://travis-ci.org/FellowshipofIntentionalCommunity/website-tests)
+
 This python project contains automated tests to verify our expectations of the
 http://ic.org website.
 
