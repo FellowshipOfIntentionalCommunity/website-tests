@@ -20,6 +20,12 @@ class ProductCategoryTests(SeleniumTestCase):
             self.assert_element_doesnt_exist(
                 product.find_element_by_css_selector, "span.price")
 
+    def test_result_count_is_hidden(self):
+        """The number of results should be hidden."""
+        result_count = self.selenium.find_element_by_css_selector(
+            '.tax-product_cat.woocommerce #content .woocommerce-result-count')
+        self.assert_css_property_equals(result_count, 'display', 'none')
+
 
 class ProductDetailTests(SeleniumTestCase):
     """Test Expectations for the Product Details Pages."""
