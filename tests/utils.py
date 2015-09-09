@@ -21,7 +21,7 @@ class SeleniumTestCase(unittest.TestCase):
         cls.selenium = webdriver.Remote(
             command_executor=settings.SELENIUM_SERVER,
             desired_capabilities=settings.SELENIUM_CAPABILITIES)
-        cls.selenium.implicitly_wait(15)
+        cls.selenium.implicitly_wait(5)
 
     @classmethod
     def teardown_class(cls):
